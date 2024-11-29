@@ -7,3 +7,15 @@ repository.workspace = true
 license.workspace = true
 edition.workspace = true
 authors.workspace = true
+
+[lib]
+proc-macro = true
+
+[dependencies]
+axum = "0.7"
+quote = "1.0.37"
+shaku = "0.6"
+syn = "2.0.89"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
