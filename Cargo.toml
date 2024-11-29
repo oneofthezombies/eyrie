@@ -1,0 +1,9 @@
+[package]
+name = "eyrie"
+version = "0.0.1"
+edition = "2021"
+authors = ["oneofthezombies hunhoekim@gmail.com"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+description = "A Rust framework for creating robust, modular, and high-performance backend applications."
+repository = "https://github.com/oneofthezombies/eyrie"
