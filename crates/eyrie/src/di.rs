@@ -1,8 +1,8 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, ItemStruct};
+use syn::{parse_macro_input, DeriveInput, ItemStruct, LitStr};
 
-pub(crate) fn module_impl(_attr: TokenStream, item: TokenStream) -> TokenStream {
+pub(crate) fn module(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemStruct);
     let module_name = input.ident;
     let expanded = quote! {
@@ -18,4 +18,12 @@ pub(crate) fn module_impl(_attr: TokenStream, item: TokenStream) -> TokenStream 
         }
     };
     expanded.into()
+}
+
+pub(crate) fn injectable(args: TokenStream, input: TokenStream) -> TokenStream {
+    todo!();
+}
+
+pub(crate) fn inject(args: TokenStream, input: TokenStream) -> TokenStream {
+    todo!();
 }

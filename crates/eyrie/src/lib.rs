@@ -1,18 +1,71 @@
-mod module;
-mod router;
+mod di;
+mod http;
 
 use proc_macro::TokenStream;
 
-use crate::{module::module_impl, router::router_impl};
-
 #[proc_macro_attribute]
 pub fn module(attr: TokenStream, item: TokenStream) -> TokenStream {
-    module_impl(attr, item)
+    crate::di::module(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn injectable(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::di::injectable(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn inject(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::di::inject(attr, item)
 }
 
 #[proc_macro_attribute]
 pub fn router(attr: TokenStream, item: TokenStream) -> TokenStream {
-    router_impl(attr, item)
+    crate::http::router(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn get(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::get(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn head(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::head(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn post(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::post(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn put(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::put(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn delete(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::delete(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn connect(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::connect(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn options(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::options(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn trace(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::trace(attr, item)
+}
+
+#[proc_macro_attribute]
+pub fn patch(attr: TokenStream, item: TokenStream) -> TokenStream {
+    crate::http::patch(attr, item)
 }
 
 // #[router("/users")]
