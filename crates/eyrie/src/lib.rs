@@ -1,23 +1,19 @@
 mod builder;
 mod di_container;
+mod di_macro;
 mod http;
 
 use proc_macro::TokenStream;
 
-// #[proc_macro_attribute]
-// pub fn module(attr: TokenStream, item: TokenStream) -> TokenStream {
-//     crate::di::module(attr, item)
-// }
+#[proc_macro_attribute]
+pub fn injectable(attr: TokenStream, item: TokenStream) -> TokenStream {
+    di_macro::injectable(attr, item)
+}
 
-// #[proc_macro_attribute]
-// pub fn injectable(attr: TokenStream, item: TokenStream) -> TokenStream {
-//     crate::di::injectable(attr, item)
-// }
-
-// #[proc_macro_attribute]
-// pub fn inject(attr: TokenStream, item: TokenStream) -> TokenStream {
-//     crate::di::inject(attr, item)
-// }
+#[proc_macro_attribute]
+pub fn inject(attr: TokenStream, item: TokenStream) -> TokenStream {
+    di_macro::inject(attr, item)
+}
 
 #[proc_macro_attribute]
 pub fn router(attr: TokenStream, item: TokenStream) -> TokenStream {

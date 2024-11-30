@@ -7,7 +7,8 @@ use std::sync::Arc;
 use once_cell::sync::Lazy;
 use tokio::sync::Mutex;
 
-static DI_CONTAINER: Lazy<Mutex<DiContainer>> = Lazy::new(|| Mutex::new(DiContainer::new()));
+static CONTAINER: Lazy<Mutex<DiContainer>> = Lazy::new(|| Mutex::new(DiContainer::new()));
+static INIT: Lazy<Mutex<Vec<Box<dyn Fn() + Send + Sync>>>> = Lazy::new(|| Mutex::new(vec![]));
 
 #[derive(Debug)]
 pub enum Error {
@@ -16,15 +17,15 @@ pub enum Error {
     TypeMismatch { expected: &'static str },
 }
 
+type Injectables = HashMap<TypeId, Arc<dyn Any + Send + Sync + 'static>>;
+
 struct DiContainer {
-    injectables: HashMap<TypeId, Arc<dyn Any + Send + Sync + 'static>>,
+    injectables: Injectables,
 }
 
 impl DiContainer {
-    fn new() -> Self {
-        Self {
-            injectables: HashMap::new(),
-        }
+    fn new(injectables: Injectables) -> Self {
+        Self { injectables }
     }
 
     pub(crate) fn register<T>(&mut self, injectable: T) -> Result<(), Error>
@@ -58,4 +59,11 @@ impl DiContainer {
         };
         Ok(casted)
     }
+}
+
+pub async fn init() -> Result<(), Error>
+where
+    T: Any + Send + Sync + 'static,
+{
+    let container = DI_CONTAINER.lock();
 }

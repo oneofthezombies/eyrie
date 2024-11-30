@@ -7,6 +7,7 @@ mod tests {
     use axum::routing::delete;
     use axum::routing::get;
     use axum::Router;
+    use tokio::sync::RwLock;
 
     use super::*;
     use crate::router;
@@ -29,6 +30,7 @@ mod tests {
 
     // #[router("/books")]
     struct BookController {
+        // #[inject]
         book_service: Arc<BookService>,
     }
 
