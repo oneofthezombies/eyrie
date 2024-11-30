@@ -1,6 +1,9 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, DeriveInput, ItemStruct, LitStr};
+use syn::parse_macro_input;
+use syn::DeriveInput;
+use syn::ItemStruct;
+use syn::LitStr;
 
 pub(crate) fn router(args: TokenStream, input: TokenStream) -> TokenStream {
     let path = parse_macro_input!(args as LitStr).value();
