@@ -40,8 +40,8 @@ mod tests {
         // 두번째 인자부터는 method_router로의 extractor들임.
         //
         // #[get("/:id")]
-        async fn get_book(State(ctx): State<Arc<Self>>, Path(id): Path<u64>) {
-            ctx.book_service.get_book(id).await
+        async fn get_book(&self, Path(id): Path<u64>) {
+            self.book_service.get_book(id).await
         }
 
         // 아래와 같은 attribute macro를 만들 예정.
